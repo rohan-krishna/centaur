@@ -51,6 +51,6 @@ class NotebookController extends Controller
 
     	$user->notebooks()->save($notebook);
 
-    	return redirect('home');
+    	return Notebook::all();
     }
 }

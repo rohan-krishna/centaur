@@ -16,6 +16,11 @@
     <link href="/css/app.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/vue-material.css') }}">
 
+    <!--CDN links for TweenLite, CSSPlugin, and EasePack-->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/plugins/CSSPlugin.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/easing/EasePack.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/TweenLite.min.js"></script>
+
     <!-- Scripts -->
     <script>
         window.Laravel = <?php echo json_encode([

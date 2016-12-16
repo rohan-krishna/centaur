@@ -16,6 +16,7 @@ require('./bootstrap');
 Vue.component('example', require('./components/Example.vue'));
 Vue.component('notebooks', require('./components/Notebooks.vue'));
 Vue.component('notes', require('./components/Notes.vue'));
+Vue.component('addnewnote', require('./components/AddNewNote.vue'));
 
 Vue.material.theme.register('myTheme', {
   primary: 'blue',
@@ -28,5 +29,10 @@ const app = new Vue({
     el: '#app',
     data: {
     	bus: bus
+    },
+    created() {
+    	var addNewNoteComponent = $('#addNewNoteComponent');
+
+    	TweenLite.set(addNewNoteComponent, { y: '-= 999px', display: 'none' });
     }
 });
