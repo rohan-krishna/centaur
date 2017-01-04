@@ -1,5 +1,8 @@
 <template>
 	<div>
+		<div v-show="notebooks.length == 0">
+			<p>No notebooks.</p>
+		</div>
 		<div class="notebooks-container">
 			<div class="notebooks-item-wrapper" v-for="notebook in notebooks">
 				<div class="notebook-item">

@@ -22,6 +22,10 @@ Route::get('/home', 'HomeController@index');
 
 Route::resource('notebooks','NotebookController');
 
+Route::get('mailtest', function() {
+	return \Mail::to("rohankrishna33@gmail.com")->send(new \centaur\Mail\TestMail());
+});
+
 
 Route::group(['prefix' => 'api'], function() {
 	
