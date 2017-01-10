@@ -7,7 +7,7 @@
             <div class="col-md-4">
                 <h3>Notebooks</h3>
                 <hr>
-                <notebooks :notebooks="{{ $notebooks }}" :bus="bus"></notebooks>
+                <notebooks :notebooks="notebooks" :bus="bus"></notebooks>
             </div>
             <div class="col-md-8">
                 <h3>Notes</h3>

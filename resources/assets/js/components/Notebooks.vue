@@ -3,19 +3,23 @@
 		<div v-show="notebooks.length == 0">
 			<p>No notebooks.</p>
 		</div>
-		<div class="notebooks-container">
-			<div class="notebooks-item-wrapper" v-for="notebook in notebooks">
+		<div class="notebooks-container" v-show="notebooks.length != 0">
+
+			<div class="notebooks-item-wrapper" v-for="(notebook,index) in notebooks">
 				<div class="notebook-item">
 					<a href="#" @click="causeLoadNotes(notebook.id)">
 						{{ notebook.title }}
 					</a>
 				</div>
 				<div class="notebook-meta">
-					<md-button @click="openDialog('dialog1',notebook.id,notebook.title)">
+					<md-button @click="openDialog('dialog1',notebook.id,notebook.title,index)">
 						<md-icon class="md-accent">create</md-icon>
-					</md-button>	
+					</md-button>
 				</div>
 			</div>
+		</div>
+		<div>
+			<md-button class="md-primary md-raised" @click="openCreateDialog('createDialog')">Add Notebook</md-button>
 		</div>
 		<!-- 	<ul class="list-group">
 				<li class="list-group-item" v-for="notebook in notebooks">
@@ -26,7 +30,7 @@
 			</ul> -->
 		<md-dialog md-open-from="#custom" md-close-to="#custom" ref="dialog1">
 		  <md-dialog-title>{{ selectedNotebook }}</md-dialog-title>
-		  <form @submit.prevent="submitForm()">
+		  <form @submit.prevent="submitForm(index)">
 		  <md-dialog-content>
 		  	<md-input-container>
 		  	   <label>Enter New Title</label>
@@ -40,8 +44,27 @@
 		  </md-dialog-actions>
 		  </form>
 		</md-dialog>
-	</div>
-	
+
+
+		<md-dialog md-open-from="#custom" md-close-to="#custom" ref="createDialog">
+		  <md-dialog-title>Create a new Notebook</md-dialog-title>
+		  <form @submit.prevent="submitCreateForm(notebook)">
+		  <md-dialog-content>
+		  	<md-input-container>
+		  	   <label>Enter New Title</label>
+		  	   <md-input placeholder="Only Text" v-model="notebook.title" required="required"></md-input>
+		  	 </md-input-container>
+		  </md-dialog-content>
+
+		  <md-dialog-actions>
+		    <md-button class="md-primary" @click="closeDialog('createDialog')">Cancel</md-button>
+		    <md-button class="md-primary" type="submit">Add</md-button>
+		  </md-dialog-actions>
+		  </form>
+		</md-dialog>
+
+	</div> <!-- End of Root Element !-->
+
 </template>
 
 <style scoped>
@@ -78,7 +101,9 @@
 			return {
 				title: '',
 				selectedNotebook: '',
-				notebookID: 0
+				notebookID: 0,
+				notebook: Object,
+				index: null
 			}
 		},
 		mounted() {
@@ -89,29 +114,42 @@
 				// console.log("Event should be dispatched!");
 				this.bus.$emit('eventDispatched',notebook);
 			},
-			submitForm() {
-				console.log("Notebook's New Title: " + this.title + " | " + "Notebook ID: " + this.notebookID);
-				this.$http.post('notebooks/edit/' + this.notebookID, { title: this.title }).then( (res) => {
-					location.reload();
-				});
+			submitForm(index) {
+				var id = this.notebookID;
+				var title = this.title;
+
+				// console.log("Notebook's New Title: " + this.title + " | " + "Notebook ID: " + this.notebookID);
+				// Update and save in front-end
+				this.notebooks[index].title = this.title;
+				this.closeDialog('dialog1');
+
+				// Save in backend
+				this.$http.post('api/notebook/' + id + '/edit', { title: title });
 			},
-			openDialog(ref,notebookID,selectedNotebook) {
+			openCreateDialog(ref) {
+				this.$refs[ref].open();
+			},
+			submitCreateForm(notebook) {
+				this.notebooks.push( { title: notebook.title });
+			},
+			openDialog(ref,notebookID,selectedNotebook,index) {
 			  this.selectedNotebook = selectedNotebook;
 			  this.notebookID = notebookID;
+				this.index = index;
 			  // console.log(this.title);
 			  this.$refs[ref].open();
 			},
-		    closeDialog(ref) {
-		      console.log(this.title);
-		      this.title = '';
-		      this.$refs[ref].close();
-		    },
-		    onOpen() {
-		      console.log('Opened');
-		    },
-		    onClose(type) {
-		      console.log('Closed', type);
-		    }
+	    closeDialog(ref) {
+	      console.log(this.title);
+	      this.title = '';
+	      this.$refs[ref].close();
+	    },
+	    onOpen() {
+	      console.log('Opened');
+	    },
+	    onClose(type) {
+	      console.log('Closed', type);
+	    }
 		}
 	}
 </script>

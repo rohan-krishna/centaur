@@ -27,6 +27,12 @@ var bus =  new Vue({});
 const app = new Vue({
     el: '#app',
     data: {
-    	bus: bus
+    	bus: bus,
+      notebooks: []
+    },
+    created() {
+      this.$http.get('api/notebooks').then( ( res ) => {
+        this.notebooks = res.data;
+      });
     }
 });
