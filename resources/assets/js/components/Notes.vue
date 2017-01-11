@@ -10,6 +10,7 @@
 			</ul>
 		</transition>
 		<p v-if="notes.length == 0 && loading == false">No Notes!</p>
+		<a href="notes/create">Create A New Note</a>
 	</div>
 </template>
 <style>

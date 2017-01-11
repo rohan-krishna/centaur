@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "node-sass": "^3.13.0",
+    "quill": "^1.1.9",
     "vue-material": "^0.4.1"
   }
 }

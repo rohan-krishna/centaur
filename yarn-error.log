@@ -1,0 +1,50 @@
+Arguments: 
+  D:\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add quill
+
+PATH: 
+  D:\cmder\bin;D:\cmder\vendor\git-for-windows\cmd;D:\cmder\vendor\conemu-maximus5\ConEmu\Scripts;D:\cmder\vendor\conemu-maximus5;D:\cmder\vendor\conemu-maximus5\ConEmu;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\laragon\bin\php\php-5.6.27-Win32-VC11-x86;C:\ProgramData\ComposerSetup\bin;D:\nodejs\;C:\Program Files\Redis\;C:\Program Files (x86)\Yarn\bin;C:\Ruby23-x64\bin;D:\cmder;C:\Users\css111100\AppData\Roaming\Composer\vendor\bin;C:\Program Files\Sublime Text 3;C:\laragon\bin\redis\redis-2.6.12;C:\Users\css111100\AppData\Roaming\npm;C:\xampp\php;C:\Users\css111100\AppData\Local\Yarn\.bin;D:\cmder\vendor\git-for-windows\usr\bin;D:\cmder\vendor\git-for-windows\usr\share\vim\vim74;D:\cmder\
+
+Yarn version: 
+  0.18.1
+
+Node version: 
+  7.3.0
+
+Platform: 
+  win32 x64
+
+npm manifest: 
+  {
+    "private": true,
+    "scripts": {
+      "prod": "gulp --production",
+      "dev": "gulp watch"
+    },
+    "devDependencies": {
+      "bootstrap-sass": "^3.3.7",
+      "gulp": "^3.9.1",
+      "jquery": "^3.1.0",
+      "laravel-elixir": "^6.0.0-9",
+      "laravel-elixir-vue-2": "^0.2.0",
+      "laravel-elixir-webpack-official": "^1.0.2",
+      "lodash": "^4.16.2",
+      "vue": "^2.0.1",
+      "vue-resource": "^1.0.3"
+    },
+    "dependencies": {
+      "node-sass": "^3.13.0",
+      "vue-material": "^0.4.1"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
+
+Trace: 
+  Error: connect ETIMEDOUT 151.101.192.133:443
+      at Object.exports._errnoException (util.js:1022:11)
+      at exports._exceptionWithHostPort (util.js:1045:20)
+      at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1090:14)

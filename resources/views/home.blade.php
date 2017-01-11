@@ -1,7 +1,7 @@
 @extends('master')
 
 @section('content')
-<div class="container">
+<div class="container" id="app" v-md-theme="'myTheme'">
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-4">

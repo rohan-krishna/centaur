@@ -108,6 +108,9 @@
 		},
 		mounted() {
 			// console.log("Hello People!");
+			this.$http.get('api/notebooks').then( (res) => {
+				this.notebooks = res.data;
+			});
 		},
 		methods: {
 			causeLoadNotes(notebook) {
@@ -130,7 +133,14 @@
 				this.$refs[ref].open();
 			},
 			submitCreateForm(notebook) {
-				this.notebooks.push( { title: notebook.title });
+				// Add Notebook
+				this.$http.post('api/notebook/create', { title: notebook.title }).then( (res) => {
+					this.notebooks.push(res.data);
+				});
+
+				// Close the modal
+				this.closeDialog('createDialog');
+
 			},
 			openDialog(ref,notebookID,selectedNotebook,index) {
 			  this.selectedNotebook = selectedNotebook;

@@ -26,7 +26,21 @@ Route::get('mailtest', function() {
 	return \Mail::to("rohankrishna33@gmail.com")->send(new \centaur\Mail\TestMail());
 });
 
+Route::resource('notes','NoteController');
+
 Route::group(['prefix' => 'api'], function() {
+
+  Route::post('notebook/create', function(Request $request) {
+
+    $user = Auth::user();
+
+    $notebook = new \centaur\Notebook;
+    $notebook->title = $request->input('title');
+    $user->notebooks()->save($notebook);
+
+    return $notebook;
+
+  });
 
 	// Get Notebooks for the authenticated user
 	Route::get('notebooks',function() {
@@ -60,5 +74,23 @@ Route::group(['prefix' => 'api'], function() {
     $user->notebooks()->save($notebook);
 
   });
+
+  Route::post('save-note', function(Request $request) {
+
+    $note = new \centaur\Note;
+
+    $note->title = "Test Note";
+
+    $note->body = $request->input('doc');
+
+    $notebook = \centaur\Notebook::first();
+
+    $notebook->notes()->save($note);
+
+    return response()->json(["message" => "success!"]);
+
+  });
+
+
 
 });
