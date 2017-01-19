@@ -10,7 +10,7 @@
 			</ul>
 		</transition>
 		<p v-if="notes.length == 0 && loading == false">No Notes!</p>
-		<a href="notes/create">Create A New Note</a>
+		<a v-bind:href="'notes/create/' + selectedNotebook">Create A New Note</a>
 	</div>
 </template>
 <style>
@@ -28,7 +28,8 @@
 			return {
 				loading: true,
 				message: 'Hello World!',
-				notes: []
+				notes: [],
+				selectedNotebook: 1
 			};
 		},
 		mounted() {
@@ -39,7 +40,8 @@
 		},
 		created() {
 			this.bus.$on('eventDispatched', function(notebook) {
-				return this.loadNotes(notebook);
+				this.loadNotes(notebook);
+				this.selectedNotebook = notebook;
 			}.bind(this));
 		},
 		methods: {

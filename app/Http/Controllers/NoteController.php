@@ -4,6 +4,9 @@ namespace centaur\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use centaur\Note;
+use centaur\NoteBook;
+
 class NoteController extends Controller
 {
     /**
@@ -21,8 +24,9 @@ class NoteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($notebook)
     {
+        $selectedNotebook = Notebook::find($notebook);
         //
         return view('notes.create');
     }

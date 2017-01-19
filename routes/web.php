@@ -26,7 +26,8 @@ Route::get('mailtest', function() {
 	return \Mail::to("rohankrishna33@gmail.com")->send(new \centaur\Mail\TestMail());
 });
 
-Route::resource('notes','NoteController');
+// notes
+Route::get('notes/create/{notebook}', 'NoteController@create');
 
 Route::group(['prefix' => 'api'], function() {
 
